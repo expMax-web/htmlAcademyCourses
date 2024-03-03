@@ -29,8 +29,6 @@ function random(min: number, max: number) {
 
 // Так как в подразбиениях после рекурсивного вызова сортировки мы будем работать не с целым массивом а его частями, сразу сделаем дополнительные параметры для их определения
 function partition(array: number[], left: number, right: number) {
-  // Не обращайте внимания на переменные origLeft/origRight: их мы ввели для удобства логирования итераций, в алгоритме они не нужны
-  const [origLeft, origRight] = [left, right];
   // Находим значение, вокруг которого будем размещать элементы
   const pivot = array[random(left, right)];
 
