@@ -1,4 +1,4 @@
-function rateLimit(logs: any) {
+export function rateLimit(logs: any) {
   const encountered = new Map();
   const rateLimited = [] as any;
 
