@@ -1,0 +1,60 @@
+Чем больше фич успешно выпускала команда разработки «Удара легенд», тем больше игроков приходило в игру. 
+Бизнес доволен, а вот команда технической поддержки не очень. 
+Ведь если раньше отслеживать все пользовательские ошибки можно было на одном мониторе разработчика поддержки, 
+то теперь следить за ними и своевременно реагировать стало нереально: и фичи (конечно же, которые писали не вы) полны багов, и баги эти случаются гораздо чаще (ведь игроков стало в разы больше).
+
+Помогите команде поддержки. Напишите ограничитель скорости обработки запросов системой логирования. Все сообщения приходят в следующем формате:
+
+{
+  "message": "Cannot read property 'score' of undefined",
+  "timestamp": 20,
+}
+      
+Необходимо игнорировать все сообщения с одинаковым содержимым, которые приходили с промежутком менее пяти секунд от последнего (разница в timestamp меньше 5). 
+И вместо их вывода дописывать в конец предыдущего такого же сообщения (x${количество повторений}): к примеру, Cannot read property 'score' of undefined (x3), если оно встретилось три раза за последние пять секунд.
+
+Имейте в виду, что система логирования сейчас очень нагружена, поэтому все операции над логами нужно производить максимально быстро!
+
+
+[
+  {
+    "message": "Cannot read property 'score' of undefined",
+    "timestamp": 0,
+  },
+  {
+    "message": "TypeError: 'undefined' is not an object",
+    "timestamp": 0,
+  },
+  {
+    "message": "Cannot read property 'score' of undefined",
+    "timestamp": 3,
+  },
+  {
+    "message": "TypeError: 'undefined' is not an object",
+    "timestamp": 5,
+  },
+  {
+    "message": "TypeError: 'undefined' is not an object",
+    "timestamp": 10,
+  },
+  {
+    "message": "Uncaught RangeError: Maximum call stack size exceeded",
+    "timestamp": 14,
+  },
+  {
+    "message": "Cannot read property 'score' of undefined",
+    "timestamp": 15,
+  },
+  {
+    "message": "ReferenceError: event is not defined",
+    "timestamp": 18,
+  },
+  {
+    "message": "Cannot read property 'score' of undefined",
+    "timestamp": 21,
+  },
+  {
+    "message": "ReferenceError: event is not defined",
+    "timestamp": 22,
+  },
+]
